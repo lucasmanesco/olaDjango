@@ -19,25 +19,10 @@ MVT - Model View Controller (variação de MVC)
 """
 
 from django.contrib import admin
-from django.http import HttpResponse
-from django.urls import path
-
-from blog import views as home_views
-from home import views as blog_views
-
-
-def home(request):
-    print('home')
-    return HttpResponse('home')
-
-
-def blog(request):
-    print('blog')
-    return HttpResponse('blog')
-
+from django.urls import include, path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('blog/', blog_views.blog),
-    path('', home_views.home),
+    path('blog/', include('blog.urls')),
+    path('', include('home.urls')),
 ]
